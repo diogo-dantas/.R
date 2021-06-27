@@ -40,7 +40,7 @@ options(digits = 2)
 tempmean_wd <-group_by(df, weekday)%>% 
 summarise(Total=mean(temp))
 
-colnames(tempmean_wd) <-c("Dias da Semana","Média da Temperatura")
+colnames(tempmean_wd) <-c("Days of the week","Temperature average")
 
 view(tempmean_wd) 
 
