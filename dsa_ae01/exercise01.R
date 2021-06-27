@@ -1,21 +1,48 @@
 #dsa_aeds01
 
 install.packages("tidyverse")
+library(tidyverse)
 
 #directory definition
-setwd("/home/tiodiovo/Área de Trabalho/practice/practiceR/dataset")
+setwd("~/dataset")
 
-df <- read.csv("hour.csv")
+#consult the current directory
+getwd()
+
+df <- read_csv("hour.csv")
 
 #mean and median
 summary(df)
 
-#mode function
-getmode <- function(v){
-        uniqv <- unique(v)
-        uniqv[which.max(tabulate(match(v,uniqv)))]
-}
-        
-seas_mode <- getmode(df$season)
-print(seas_mode)
+#or
 
+lapply(df, mean)
+lapply(df, median)
+
+
+#mode function
+
+md <- lapply(df, table)
+lapply(md, max)
+
+#average temperature per weekday of the df
+
+df$weekday[df$weekday=="0"] <- "Monday"
+df$weekday[df$weekday=="1"] <- "Tuesday"
+df$weekday[df$weekday=="2"] <- "Wednesday"
+df$weekday[df$weekday=="3"] <- "Thursday"
+df$weekday[df$weekday=="4"] <- "Friday"
+df$weekday[df$weekday=="5"] <- "Saturday"
+df$weekday[df$weekday=="6"] <- "Sunday"
+
+options(digits = 2)
+
+tempmean_wd <-group_by(df, weekday)%>% 
+summarise(Total=mean(temp))
+
+colnames(tempmean_wd) <-c("Dias da Semana","Média da Temperatura")
+
+view(tempmean_wd) 
+
+
+        
