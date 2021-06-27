@@ -44,5 +44,16 @@ colnames(tempmean_wd) <-c("Days of the week","Temperature average")
 
 view(tempmean_wd) 
 
+#temperature variable histogram
+
+df %>% 
+ggplot(aes(x = temp)) +
+ geom_histogram(color = "white", fill = "lightblue", bins = 30) +
+ theme_classic(base_size = 18) +
+ xlab("Temperature") +
+ ylab("Frequency")
+        
+
+
 
         
